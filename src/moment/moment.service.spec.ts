@@ -40,4 +40,13 @@ describe('MomentService', () => {
       isLast: false,
     });
   });
+
+  it('should query moment by id', async () => {
+    const moment = MomentMemoryRepository.generateMoments(1)[0];
+    jest.spyOn(repo, 'queryById').mockResolvedValueOnce(moment);
+    const result = await service.queryById('m-0');
+    expect(result.id).toBe('m-0');
+    const resultNotFound = await service.queryById('something-not-exists');
+    expect(resultNotFound).toBeUndefined();
+  });
 });

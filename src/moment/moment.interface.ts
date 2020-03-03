@@ -4,4 +4,5 @@ export interface Moment {
   createdAt: Date;
   content: string;
   createdBy: User;
+  id: string;
 }

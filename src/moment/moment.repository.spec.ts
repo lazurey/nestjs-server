@@ -11,4 +11,11 @@ describe('Moment Memory Repository', () => {
     expect(result).toHaveLength(5);
     expect(total).toBe(120);
   });
+  it('should query moment by id', async () => {
+    const repo = new MomentMemoryRepository();
+    const result = await repo.queryById('m-0');
+    expect(result).not.toBeUndefined();
+    expect(result.id).toBe('m-0');
+    expect(await repo.queryById('something-never-exists')).toBeUndefined();
+  });
 });

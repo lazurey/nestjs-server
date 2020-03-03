@@ -22,4 +22,8 @@ export class MomentService {
       isLast: page >= totalPages,
     }
   }
+
+  async queryById(id: string) {
+    return await this.momentDa.queryById(id);
+  }
 }

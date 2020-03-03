@@ -33,7 +33,7 @@ describe('Moment Controller', () => {
     const result = {
       items: [],
     } as PagedResponse<Moment>;
-    jest.spyOn(momentService, 'queryMomentsByPage').mockImplementation(() => Promise.resolve(result));
+    jest.spyOn(momentService, 'queryMomentsByPage').mockImplementationOnce(() => Promise.resolve(result));
     expect(await controller.getMoments({
       page: 0,
       size: 20,
@@ -46,5 +46,25 @@ describe('Moment Controller', () => {
     await controller.getMoments({});
     expect(queryMomentsByPage).toHaveBeenCalledTimes(1);
     expect(queryMomentsByPage).toHaveBeenCalledWith(0, 20);
+  });
+
+  it('should get specified moment by id', async () => {
+    const result = {
+      id: 'm-1',
+      createdBy: {
+        username: 'robo_head',
+      },
+      content: 'hello world',
+      createdAt: new Date('2020-01-01 00:00:00'),
+    };
+    jest.spyOn(momentService, 'queryById').mockResolvedValueOnce(result);
+    const moment = await controller.getMomentById('m-1');
+    expect(moment).toBe(result);
+  });
+  it('should throw not found error when moment not found by id', () => {
+    jest.spyOn(momentService, 'queryById').mockResolvedValueOnce(undefined);
+    expect(controller.getMomentById('whatever-id'))
+      .rejects
+      .toThrow();
   });
 });
