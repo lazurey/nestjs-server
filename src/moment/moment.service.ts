@@ -10,15 +10,16 @@ export class MomentService {
   }
 
   async queryMomentsByPage(page: number, size: number): Promise<PagedResponse<Moment>> {
-    const items = await this.momentDa.findAll(page, size);
+    const items = await this.momentDa.queryByPage(page, size);
     const totalCount = await this.momentDa.getTotal();
+    const totalPages = Math.floor(totalCount / size) + 1;
     return {
       items,
       currentPage: page,
       pageSize: size,
-      totalPages: totalCount % size,
+      totalPages,
       totalCount,
-      isLast: page >= totalCount % size,
+      isLast: page >= totalPages,
     }
   }
 }

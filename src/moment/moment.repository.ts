@@ -8,10 +8,10 @@ export class MomentMemoryRepository implements IMomentDataAccess {
   private readonly moments: Moment[];
 
   constructor() {
-    this.moments = this.generateMoments(120);
+    this.moments = MomentMemoryRepository.generateMoments(120);
   }
 
-  findAll(page: number, size: number): Promise<Moment[]> {
+  queryByPage(page: number, size: number): Promise<Moment[]> {
     return new Promise((resolve) => resolve(slice(this.moments, page * size, (page + 1) * size)));
   }
 
@@ -19,7 +19,7 @@ export class MomentMemoryRepository implements IMomentDataAccess {
     return Promise.resolve(this.moments.length);
   }
 
-  generateMoments(count: number): Moment[] {
+  static generateMoments(count: number): Moment[] {
     const arr = new Array(count);
     return chain(arr)
       .fill(0)
