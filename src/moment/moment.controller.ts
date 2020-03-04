@@ -1,9 +1,8 @@
-import {Controller, Get, NotFoundException, Param, Query, UseGuards} from '@nestjs/common';
-import { PagedResponse } from '../response.interface';
-import { MomentService } from './moment.service';
-import { PagedQueryParams } from '../request.interface';
-import { Moment } from './moment.interface';
-import { AuthGuard } from '@nestjs/passport';
+import {Controller, Get, NotFoundException, Param, Query} from '@nestjs/common';
+import {PagedResponse} from '../response.interface';
+import {MomentService} from './moment.service';
+import {PagedQueryParams} from '../request.interface';
+import {Moment} from './moment.interface';
 
 
 @Controller('moments')
@@ -13,13 +12,11 @@ export class MomentController {
   }
 
   @Get()
-  @UseGuards(AuthGuard('jwt'))
   async getMoments(@Query() query: PagedQueryParams): Promise<PagedResponse<Moment>> {
     return await this.momentService.queryMomentsByPage(query.page || 0, query.size || 20);
   }
 
   @Get(':id')
-  @UseGuards(AuthGuard('jwt'))
   async getMomentById(@Param('id') id: string): Promise<Moment> {
     const result = await this.momentService.queryById(id);
     if (result) {

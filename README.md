@@ -31,3 +31,16 @@ npm run test:cov
 ```bash
 npm run test:e2e
 ```
+
+**Authentication**
+
+use JWT Token to authenticate
+
+```bash
+curl -X POST http://localhost:3000/auth/login -d '{"username": "john", "password": "changeme"}' -H "Content-Type: application/json
+
+{"access_token":"$token"}
+
+curl -X GET http://localhost:3000/moments -H "Authorization: Bearer $token"
+
+```

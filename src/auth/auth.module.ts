@@ -7,9 +7,10 @@ import {jwtConstants} from "./constants";
 import {JwtModule} from '@nestjs/jwt';
 import {JwtStrategy} from "./jwt.strategy";
 import { AuthController } from './auth.controller';
+import {SessionSerializer} from "./session.serializer";
 
 @Module({
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, SessionSerializer],
   imports: [
     PassportModule,
     JwtModule.register({

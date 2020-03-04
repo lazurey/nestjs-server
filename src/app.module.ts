@@ -18,6 +18,7 @@ import { UserModule } from './user/user.module';
       useClass: MomentMemoryRepository,
     }
   ],
+
 })
 export class AppModule {
 }
