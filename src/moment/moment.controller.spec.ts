@@ -49,14 +49,7 @@ describe('Moment Controller', () => {
   });
 
   it('should get specified moment by id', async () => {
-    const result = {
-      id: 'm-1',
-      createdBy: {
-        username: 'robo_head',
-      },
-      content: 'hello world',
-      createdAt: new Date('2020-01-01 00:00:00'),
-    };
+    const result = MomentMemoryRepository.generateMoments(1)[0];
     jest.spyOn(momentService, 'queryById').mockResolvedValueOnce(result);
     const moment = await controller.getMomentById('m-1');
     expect(moment).toBe(result);
