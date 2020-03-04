@@ -1,7 +1,10 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { IMomentDataAccess } from './moment.da.interface';
-import { PagedResponse } from '../response.interface';
-import { Moment } from './moment.interface';
+import {Inject, Injectable} from '@nestjs/common';
+import {IMomentDataAccess} from './moment.da.interface';
+import {PagedResponse} from '../response.interface';
+import {Moment} from './moment.interface';
+import {MomentRequest} from "./moment.request.interface";
+import {count} from "rxjs/operators";
+import {User} from "../user.interface";
 
 @Injectable()
 export class MomentService {
@@ -25,5 +28,20 @@ export class MomentService {
 
   async queryById(id: string) {
     return await this.momentDa.queryById(id);
+  }
+
+  async save(momentRequest: MomentRequest, user: User): Promise<Moment> {
+
+    let moment = {
+      ...momentRequest,
+      created_at: new Date(),
+      reposts_count: 1,
+      comments_count: 1,
+      attitudes_count: 1,
+      user: user,
+      pic_num: 1,
+    } as Moment;
+
+    return await this.momentDa.save(moment);
   }
 }

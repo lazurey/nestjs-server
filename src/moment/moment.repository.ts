@@ -1,7 +1,7 @@
-import { IMomentDataAccess } from './moment.da.interface';
-import { Moment } from './moment.interface';
-import { Injectable } from '@nestjs/common';
-import { chain, find, slice } from 'lodash';
+import {IMomentDataAccess} from './moment.da.interface';
+import {Moment} from './moment.interface';
+import {Injectable} from '@nestjs/common';
+import {chain, find, slice} from 'lodash';
 
 @Injectable()
 export class MomentMemoryRepository implements IMomentDataAccess {
@@ -45,5 +45,19 @@ export class MomentMemoryRepository implements IMomentDataAccess {
     const numberId = parseInt(id, 10);
     const result = find(this.moments, (moment: Moment) => moment.id === numberId);
     return Promise.resolve(result);
+  }
+
+  save(moment: Moment): Promise<Moment> {
+    return this.getTotal()
+      .then(total => {
+        return {
+          ...moment,
+          id: total + 1,
+        } as Moment
+      })
+      .then(moment => {
+        this.moments.push(moment)
+        return moment
+      });
   }
 }

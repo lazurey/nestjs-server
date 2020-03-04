@@ -44,3 +44,22 @@ curl -X POST http://localhost:3000/auth/login -d '{"username": "john", "password
 curl -X GET http://localhost:3000/moments -H "Authorization: Bearer $token"
 
 ```
+
+
+** API **
+
+
+```bash
+
+
+Create Moment
+curl -X POST http://localhost:3000/moments -d '{"text":"hehe"}' -H "Authorization: Bearer $token" -H "Content-Type: application/json"
+
+Get Moment List
+curl -X GET http://localhost:3000/moments -H "Authorization: Bearer $token"
+
+Get Moment
+curl -X GET http://localhost:3000/moments/1 -H "Authorization: Bearer $token"
+
+
+```
