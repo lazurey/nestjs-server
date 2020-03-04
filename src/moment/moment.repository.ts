@@ -11,6 +11,28 @@ export class MomentMemoryRepository implements IMomentDataAccess {
     this.moments = MomentMemoryRepository.generateMoments(120);
   }
 
+  static generateMoments(count: number): Moment[] {
+    const arr = new Array(count);
+    return chain(arr)
+      .fill(0)
+      .map((_, idx: number): Moment => ({
+        id: idx,
+        text: `Hello World: ${idx === 0 ? 'once' : (idx + 1) + ' times.'}`,
+        created_at: new Date('1970-01-01 00:00:00'),
+        reposts_count: 0,
+        comments_count: 0,
+        attitudes_count: 0,
+        pic_num: 0,
+        pic_infos: {},
+        user: {
+          id: idx,
+          screen_name: 'Robo_Head',
+          name: 'robo_head',
+        },
+      }))
+      .value();
+  }
+
   queryByPage(page: number, size: number): Promise<Moment[]> {
     return new Promise((resolve) => resolve(slice(this.moments, page * size, (page + 1) * size)));
   }
@@ -20,22 +42,8 @@ export class MomentMemoryRepository implements IMomentDataAccess {
   }
 
   queryById(id: string): Promise<Moment | undefined> {
-    const result = find(this.moments, (moment: Moment) => moment.id === id);
+    const numberId = parseInt(id, 10);
+    const result = find(this.moments, (moment: Moment) => moment.id === numberId);
     return Promise.resolve(result);
-  }
-
-  static generateMoments(count: number): Moment[] {
-    const arr = new Array(count);
-    return chain(arr)
-      .fill(0)
-      .map((_, idx: number): Moment => ({
-        id: `m-${idx}`,
-        content: `Hello World: ${idx === 0 ? 'once' : (idx + 1) + ' times.'}`,
-        createdAt: new Date('1970-01-01 00:00:00'),
-        createdBy: {
-          username: 'robo_head',
-        },
-      }))
-      .value();
   }
 }

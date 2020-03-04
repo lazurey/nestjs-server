@@ -33,10 +33,10 @@ describe('AppController (e2e)', () => {
 
   it('/moments/:id (GET)', () => {
     return request(app.getHttpServer())
-      .get('/moments/m-0')
+      .get('/moments/0')
       .expect(200)
       .then((response) => {
-        expect(response.body.id).toBe('m-0');
+        expect(response.body.id).toBe(0);
       });
   });
 });

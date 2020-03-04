@@ -13,9 +13,9 @@ describe('Moment Memory Repository', () => {
   });
   it('should query moment by id', async () => {
     const repo = new MomentMemoryRepository();
-    const result = await repo.queryById('m-0');
+    const result = await repo.queryById('0');
     expect(result).not.toBeUndefined();
-    expect(result.id).toBe('m-0');
+    expect(result.id).toBe(0);
     expect(await repo.queryById('something-never-exists')).toBeUndefined();
   });
 });
