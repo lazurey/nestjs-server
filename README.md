@@ -41,8 +41,6 @@ curl -X POST http://localhost:3000/auth/login -d '{"username": "john", "password
 
 {"access_token":"$token"}
 
-curl -X GET http://localhost:3000/moments -H "Authorization: Bearer $token"
-
 ```
 
 
