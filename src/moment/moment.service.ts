@@ -13,6 +13,11 @@ export class MomentService {
     this.logger.setContext("MomentService");
   }
 
+  async queryById(id: string) {
+    this.logger.log(`query moment ${id}`);
+    return await this.momentDa.queryById(id);
+  }
+
   async queryMomentsByPage(page: number, size: number): Promise<PagedResponse<Moment>> {
     const items = await this.momentDa.queryByPage(page, size);
     const totalCount = await this.momentDa.getTotal();
@@ -27,11 +32,6 @@ export class MomentService {
       totalCount,
       isLast: page >= totalPages,
     }
-  }
-
-  async queryById(id: string) {
-    this.logger.log(`query moment ${id}`);
-    return await this.momentDa.queryById(id);
   }
 
   async save(momentRequest: MomentRequest, user: User): Promise<Moment> {
