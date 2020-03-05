@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import {Logger, Module} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MomentController } from './moment/moment.controller';
@@ -13,6 +13,7 @@ import { UserModule } from './user/user.module';
   providers: [
     AppService,
     MomentService,
+    Logger,
     {
       provide: 'momentDa',
       useClass: MomentMemoryRepository,
