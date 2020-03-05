@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 COPY . .
 
-RUN npm ci --no-progress
+RUN HUSKY_SKIP_INSTALL=1 npm ci --no-progress
 RUN npm run build
 
 CMD ["node", "dist/main"]
