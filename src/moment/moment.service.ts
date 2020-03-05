@@ -1,15 +1,15 @@
-import {Inject, Injectable} from '@nestjs/common';
+import {Inject, Injectable, Logger} from '@nestjs/common';
 import {IMomentDataAccess} from './moment.da.interface';
 import {PagedResponse} from '../response.interface';
 import {Moment} from './moment.interface';
 import {MomentRequest} from "./moment.request.interface";
-import {count} from "rxjs/operators";
 import {User} from "../user.interface";
 
 @Injectable()
 export class MomentService {
 
-  constructor(@Inject('momentDa') private readonly momentDa: IMomentDataAccess) {
+  constructor(@Inject('momentDa') private readonly momentDa: IMomentDataAccess,
+              private readonly logger: Logger) {
   }
 
   async queryMomentsByPage(page: number, size: number): Promise<PagedResponse<Moment>> {
@@ -27,6 +27,7 @@ export class MomentService {
   }
 
   async queryById(id: string) {
+    this.logger.log("query moment");
     return await this.momentDa.queryById(id);
   }
 

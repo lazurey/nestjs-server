@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MomentService } from './moment.service';
 import { MomentMemoryRepository } from './moment.repository';
+import {Logger} from "@nestjs/common";
 
 describe('MomentService', () => {
   let service: MomentService;
@@ -9,6 +10,7 @@ describe('MomentService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
+        Logger,
         MomentService,
         {
           provide: 'momentDa',

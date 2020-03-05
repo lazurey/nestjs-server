@@ -4,6 +4,7 @@ import { MomentService } from './moment.service';
 import { MomentMemoryRepository } from './moment.repository';
 import { Moment } from './moment.interface';
 import { PagedResponse } from '../response.interface';
+import {Logger} from "@nestjs/common";
 
 describe('Moment Controller', () => {
   let controller: MomentController;
@@ -14,6 +15,7 @@ describe('Moment Controller', () => {
       controllers: [MomentController],
       providers: [
         MomentService,
+        Logger,
         {
           provide: 'momentDa',
           useClass: MomentMemoryRepository,
