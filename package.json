@@ -22,7 +22,7 @@
   "dependencies": {
     "@nestjs/common": "^6.10.14",
     "@nestjs/core": "^6.10.14",
-    "@nestjs/jwt": "^6.1.2",
+    "@nestjs/jwt": "^10.0.1",
     "@nestjs/passport": "^6.2.0",
     "@nestjs/platform-express": "^6.10.14",
     "class-transformer": "^0.2.3",
@@ -30,7 +30,7 @@
     "helmet": "^3.21.3",
     "lodash": "^4.17.15",
     "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0",
+    "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
